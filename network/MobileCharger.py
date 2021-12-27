@@ -1,6 +1,6 @@
-import random
-import network.Parameter as Para
 import scipy.spatial.distance as distance
+
+import network.Parameter as Para
 
 
 class MobileCharger:
@@ -153,7 +153,7 @@ class MobileCharger:
                 nodes = action[2]
                 yield self.env.process(
                     self.move(destination=destination, simulateTime=simulateTime))
-                print(str(self.env.now) + " " + str(self.location))
+                print('Time: ' + str(self.env.now) + ", MC " + str(self.id) + ' is at ' + str(self.location))
                 if self.location != net.baseStation.location and len(nodes) != 0:
                     yield self.env.process(
                         self.chargeNodes(chargingTime=chargingTime, simulateTime=simulateTime,

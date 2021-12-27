@@ -1,5 +1,5 @@
-import random
 from abc import abstractmethod
+
 from optimizer.Optimizer import Optimizer
 
 

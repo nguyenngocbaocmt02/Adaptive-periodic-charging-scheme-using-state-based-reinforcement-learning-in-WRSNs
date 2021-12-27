@@ -3,7 +3,6 @@ import simpy
 from iostream.Util import Util
 from network.MobileCharger import MobileCharger
 from network.Network import Network
-from optimizer.offlineoptimizer.RandomOffineOptimizer import RandomOfflineOptimizer
 from optimizer.ondemandoptimizer.RandomOnDemandOptimizer import RandomOnDemandOptimizer
 
 util = Util("../data/ga200_05_simulated.txt")

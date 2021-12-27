@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.spatial.distance as distance
+
 import network.Parameter as Para
 
 
@@ -29,12 +30,12 @@ class Node:
         """
         sumTime = simulateTime
         while sumTime != 0:
-            if sumTime<t:
+            if sumTime < t:
                 t = sumTime
             # if self.id == 0:
-                #print(str(self.env.now)+" "+str(self.energy)+" "+str(self.energyRR))
+            # print(str(self.env.now)+" "+str(self.energy)+" "+str(self.energyRR))
             if self.status == 0:
-                sumTime-= t
+                sumTime -= t
                 yield self.env.timeout(t)
                 continue
             self.energy = min(max(self.energy - t * self.energyCR + t * self.energyRR, self.threshold), self.capacity)
@@ -46,11 +47,11 @@ class Node:
 
     def charged(self, mc):
         if self.status == 1:
-            self.energyRR += mc.alpha / (distance.euclidean(self.location,mc.location) + mc.beta) ** 2
+            self.energyRR += mc.alpha / (distance.euclidean(self.location, mc.location) + mc.beta) ** 2
 
     def chargingDisconnect(self, mc):
         if self.status == 1:
-            self.energyRR -= mc.alpha / (distance.euclidean(self.location,mc.location) + mc.beta) ** 2
+            self.energyRR -= mc.alpha / (distance.euclidean(self.location, mc.location) + mc.beta) ** 2
 
     def checkStatus(self):
         if self.energy <= self.threshold:

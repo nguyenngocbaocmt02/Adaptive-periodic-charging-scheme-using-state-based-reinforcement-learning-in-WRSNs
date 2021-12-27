@@ -64,7 +64,7 @@ class FuzzyCS:
             if node.energy - T * node.energyCR <= node.threshold:
                 RS += 1
             num += 1
-        print(str(RS)+' '+str(num))
+        print(str(RS) + ' ' + str(num))
         if num == 0:
             num = 1
         RS = RS / num

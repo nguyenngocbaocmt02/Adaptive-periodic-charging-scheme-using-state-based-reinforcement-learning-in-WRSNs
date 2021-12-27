@@ -1,6 +1,8 @@
-import random
 import math
+import random
+
 from scipy.spatial import distance
+
 from optimizer.offlineoptimizer.GraphRL.Vertex import Vertex
 
 
@@ -40,7 +42,7 @@ class StatusGraph:
             upperBound = self.lowerNormalize(min(self.T - distance.euclidean(node.location,
                                                                              self.net.baseStation.location) /
                                                  self.mc.velocity,
-                                                 (node.energy-node.threshold) / node.energyCR))
+                                                 (node.energy - node.threshold) / node.energyCR))
             upperBound -= self.delta
             tcSafe = (self.Esafe[node.id] - (node.energy - self.T * node.energyCR)) / self.U
             # trimming the tree
@@ -66,9 +68,11 @@ class StatusGraph:
                 # reward obtained by charging
                 reward += tc * self.U / node.capacity
                 # reward for saving a risky node
-                if node.energy - self.T * node.energyCR <= node.threshold and node.energy - self.T * node.energyCR + tc * self.U >= self.Esafe[node.id]:
+                if node.energy - self.T * node.energyCR <= node.threshold and node.energy - self.T * node.energyCR + tc * self.U >= \
+                        self.Esafe[node.id]:
                     reward += 100
-                elif node.energy - self.T * node.energyCR <= self.Esafe[node.id] <= node.energy - self.T * node.energyCR + tc * self.U:
+                elif node.energy - self.T * node.energyCR <= self.Esafe[
+                    node.id] <= node.energy - self.T * node.energyCR + tc * self.U:
                     reward += 10
                 self.mapNodeVertexes[node.id][l] = Vertex(node=node, lowerArrivalTime=l,
                                                           upperArrivalTime=l + self.delta,
@@ -93,7 +97,7 @@ class StatusGraph:
             self.path.clear()
             self.Gt.clear()
             self.dfs(self.start)
-            #print(str(i)+" "+str(self.Gt[-1]))
+            # print(str(i)+" "+str(self.Gt[-1]))
             for j, vertex in enumerate(self.path):
                 vertex.N += 1
                 vertex.value = vertex.value + 1.0 / vertex.N * (self.Gt[-1] - self.Gt[j] - vertex.value)
@@ -128,7 +132,7 @@ class StatusGraph:
         if next is None:
             return
         if random.random() < self.epi:
-            next = tmp[random.randint(0, len(tmp)-1)]
+            next = tmp[random.randint(0, len(tmp) - 1)]
         self.path.append(next)
         if len(self.Gt) == 0:
             self.Gt.append(next.reward)

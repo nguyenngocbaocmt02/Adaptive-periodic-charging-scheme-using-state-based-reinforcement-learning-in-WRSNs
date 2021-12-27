@@ -1,4 +1,3 @@
-
 class Network:
     def __init__(self, env, listNodes, baseStation):
         self.env = env

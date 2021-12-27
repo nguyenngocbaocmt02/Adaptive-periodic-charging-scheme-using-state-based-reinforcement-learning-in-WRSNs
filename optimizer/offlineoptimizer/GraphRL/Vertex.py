@@ -1,5 +1,5 @@
 class Vertex:
-    def __init__(self, lowerArrivalTime, upperArrivalTime, chargingTime, node=None, endVertex=False, reward = 0):
+    def __init__(self, lowerArrivalTime, upperArrivalTime, chargingTime, node=None, endVertex=False, reward=0):
         self.node = node
         self.lowerArrivalTime = lowerArrivalTime
         self.upperArrivalTime = upperArrivalTime

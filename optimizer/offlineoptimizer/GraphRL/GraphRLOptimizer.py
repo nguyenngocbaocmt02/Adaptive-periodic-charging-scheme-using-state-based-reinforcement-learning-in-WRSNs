@@ -1,5 +1,5 @@
 from abc import ABC
-from optimizer.offlineoptimizer.GraphRL.FuzzyCS import FuzzyCS
+
 from optimizer.offlineoptimizer.GraphRL.StatusGraph import StatusGraph
 from optimizer.offlineoptimizer.OfflineOptimizer import OfflineOptimizer
 
@@ -10,7 +10,7 @@ class GraphRlOptimizer(OfflineOptimizer, ABC):
         self.checkPoint = 0
         self.T = T
         self.testedT = testedT
-        self.fuzzy = FuzzyCS()
+        self.fuzzy = None
         self.Esafe = 8000
         self.linearDF = (self.Esafe - 800) / int(self.testedT / self.T)
 
@@ -23,7 +23,6 @@ class GraphRlOptimizer(OfflineOptimizer, ABC):
                 Esafe.append(0)
             else:
                 Esafe.append(self.Esafe)
-        print(Esafe)
         self.Esafe -= self.linearDF
         self.checkPoint += self.T
         graph = StatusGraph(net=net, mc=mc, delta=100, T=T, Esafe=Esafe)
@@ -33,3 +32,4 @@ class GraphRlOptimizer(OfflineOptimizer, ABC):
             mc.schedule.append([ver.node.location, ver.chargingTime, [ver.node]])
         mc.schedule.append([net.baseStation.location, 0, []])
         del graph
+        print('Time: ' + str(self.env.now) + ' The number of dead node:' + str(net.countDeadNodes()))
