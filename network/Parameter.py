@@ -10,6 +10,8 @@ MC_CAPACITY = 108000
 MC_THRESHOLD = 0
 MC_VELOCITY = 5
 MC_PM = 1
+
+# multiple nodes charging model
 MC_ALPHA = 3600
 MC_BETA = 30
 

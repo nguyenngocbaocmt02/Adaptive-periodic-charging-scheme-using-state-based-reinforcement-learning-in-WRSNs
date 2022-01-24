@@ -2,7 +2,7 @@ from abc import ABC
 
 from optimizer.offlineoptimizer.GraphRL.StatusGraph import StatusGraph
 from optimizer.offlineoptimizer.OfflineOptimizer import OfflineOptimizer
-
+from Version1 import  StatusGraph1
 
 class GraphRlOptimizer(OfflineOptimizer, ABC):
     def __init__(self, env, T, testedT):
@@ -25,7 +25,7 @@ class GraphRlOptimizer(OfflineOptimizer, ABC):
                 Esafe.append(self.Esafe)
         self.Esafe -= self.linearDF
         self.checkPoint += self.T
-        graph = StatusGraph(net=net, mc=mc, delta=100, T=T, Esafe=Esafe)
+        graph = StatusGraph1(net=net, mc=mc, delta=100, T=T, Esafe=Esafe)
         graph.initialize()
         # schedule MC
         for ver in graph.path:

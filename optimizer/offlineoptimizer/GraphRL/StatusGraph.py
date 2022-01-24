@@ -12,11 +12,12 @@ class StatusGraph:
         self.net = net
         self.mc = mc
         self.mapNodeVertexes = [{} for i in range(len(self.net.listNodes))]
+        self.U = self.mc.alpha / (self.mc.beta ** 2)
         self.T = T
         self.Esafe = Esafe
         self.path = []
         self.Gt = []
-        self.U = self.mc.alpha / (self.mc.beta ** 2)
+
         self.start = Vertex(0, 0, 0)
         self.visited = [False for i in range(len(self.net.listNodes))]
         self.epi = 1
@@ -90,6 +91,7 @@ class StatusGraph:
                     distance.euclidean(self.net.listNodes[i].location
                                        , self.net.baseStation.location) / self.mc.velocity)])
         self.epi = 1
+
         for i in range(1, 30000):
             if i == 30000:
                 self.epi = 0
